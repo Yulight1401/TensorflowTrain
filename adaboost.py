@@ -78,7 +78,7 @@ def adaClassify (dataToClass, classifierArray):
 		classifierArray[i]['thresh'],\
 		classifierArray[i]['ineq'])
 		aggClassEst += classifierArray[i]['alpha'] * classEst
-		print (aggClassEst)
+		print (aggClassEst, classifierArray[i]['alpha'], classEst)
 	return np.sign(aggClassEst)
 
 datMat, classLabels = loadSimpData()
@@ -87,5 +87,5 @@ print("dataMat:", datMat, "classLabels:", classLabels)
 classifierArray = adaBoostTrainDS(datMat, classLabels, 9)
 print("classifierArray:", classifierArray)
 
-result = adaClassify([2, 2], classifierArray)
+result = adaClassify([1.2, 2], classifierArray)
 print("result:", result)
