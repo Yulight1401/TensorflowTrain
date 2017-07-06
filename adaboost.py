@@ -26,7 +26,7 @@ def buildStump (dataArray, classLabels, D):
 	numSteps = 10.0
 	bestStump = {}
 	bestClassEst = np.mat(np.zeros((m, 1)))
-	minError = 0.8
+	minError = 0.3
 	for i in range(n):
 		rangeMin = dataMatrix[:, i].min()
 		rangeMax = dataMatrix[:, i].max()
@@ -71,4 +71,7 @@ def adaBoostTrainDS (dataArray, classLabels, numIt = 40):
 
 
 datMat, classLabels = loadSimpData()
+print("dataMat:", datMat, "classLabels:", classLabels)
+
 classifierArray = adaBoostTrainDS(datMat, classLabels, 9)
+print("classifierArray:", classifierArray)
