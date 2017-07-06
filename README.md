@@ -10,7 +10,6 @@ AdaBoost:
 
 
 ``` shell
-
 D:\GitAPP\TensorflowTrain>python adaboost.py
 dataMat: [[ 1.   2.1]
  [ 2.   1.1]
@@ -29,6 +28,9 @@ D: [[ 0.33333333  0.08333333  0.25        0.25        0.08333333]]
 classEst： [[ 1. -1. -1. -1. -1.]]
 aggClassEst: [[ 0.86087792  0.63773437 -0.74855999 -0.74855999  0.63773437]]
 total error:  0.0
-classifierArray: [{'ineq': 'lt', 'alpha': 0.6931471805599453, 'thresh': 1.3, 'dim': 0}, {'ineq': 'lt', 'alpha': 0.5493061443340548, 'thresh': 0.90000000000000002, 'dim': 0}, {'ineq': 'lt', 'alpha': 0.8047189562170503, 'thresh': 1.1100000000000001, 'dim': 1}]
-
+classifierArray: [{'alpha': 0.6931471805599453, 'ineq': 'lt', 'dim': 0, 'thresh': 1.3}, {'alpha': 0.5493061443340548, 'ineq': 'lt', 'dim': 0, 'thresh': 0.90000000000000002}, {'alpha': 0.8047189562170503, 'ineq': 'lt', 'dim': 1, 'thresh': 1.1100000000000001}]
+[[ 0.69314718]]
+[[ 1.24245332]]
+[[ 2.04717228]]
+result: [[ 1.]]
 ```
