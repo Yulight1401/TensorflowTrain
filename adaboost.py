@@ -26,7 +26,7 @@ def buildStump (dataArray, classLabels, D):
 	numSteps = 10.0
 	bestStump = {}
 	bestClassEst = np.mat(np.zeros((m, 1)))
-	minError = 0.5
+	minError = 0.8
 	for i in range(n):
 		rangeMin = dataMatrix[:, i].min()
 		rangeMax = dataMatrix[:, i].max()
@@ -36,6 +36,7 @@ def buildStump (dataArray, classLabels, D):
 				threshVal = (rangeMin + float(j) * stepSize)
 				predictedVals = stumpClassify(dataMatrix, i, threshVal, inquel)
 				errArr = np.mat(np.ones((m ,1)))
+				errArr[predictedVals == labelMatrix] = 0
 				weightedError = D.T * errArr
 				if weightedError < minError:
 					minError = weightedError
@@ -64,11 +65,10 @@ def adaBoostTrainDS (dataArray, classLabels, numIt = 40):
 		print ("aggClassEst:", aggClassEst.T)
 		aggErrors = np.multiply(np.sign(aggClassEst) != np.mat(classLabels).T, np.ones((m, 1)))
 		errorRate = aggErrors.sum() / m
-		print ("total error: ", aggClassEst)
+		print ("total error: ", errorRate)
 		if errorRate == 0.0: break
 	return weakClassArr
 
 
 datMat, classLabels = loadSimpData()
 classifierArray = adaBoostTrainDS(datMat, classLabels, 9)
-print (classifierArray)
