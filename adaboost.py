@@ -14,15 +14,15 @@ def loadSimpData ():
 def stumpClassify (dataMatrix, dimen, threshVal, threshIneq):
 	retArray = np.ones((np.shape(dataMatrix)[0], 1))
 	if threshIneq == 'lt':
-		retArray[dataMatrix[:, dimen] <= threshVal] = -1.0 #截取矩阵dimen列的所有元素,满足条件的全部赋值为-1
+		retArray[dataMatrix[:, dimen] <= threshVal] = -1.0 #截取矩阵dimen列的所有元素,满足条件的全部赋值为-1，也就是取第dimen维的向量来做判别标准。
 	else:
 		retArray[dataMatrix[:, dimen] > threshVal] = 1.0
 	return retArray
 
-def buildStump (dataArray, classLabels, D):
+def buildStump (dataArray, classLabels, D): #D为样本的权重
 	dataMatrix = np.mat(dataArray)
 	labelMatrix = np.mat(classLabels).T
-	m, n = np.shape(dataMatrix)
+	m, n = np.shape(dataMatrix) #m为样本数目，n为样本的维度
 	numSteps = 10.0
 	bestStump = {}
 	bestClassEst = np.mat(np.zeros((m, 1)))
@@ -87,5 +87,5 @@ print("dataMat:", datMat, "classLabels:", classLabels)
 classifierArray = adaBoostTrainDS(datMat, classLabels, 9)
 print("classifierArray:", classifierArray)
 
-result = adaClassify([1.2, 2], classifierArray)
+result = adaClassify([0.9, 1.8], classifierArray)
 print("result:", result)

@@ -6,8 +6,18 @@ This res is used to storage the demos I made, when I studying ML
 
 ---
 
-AdaBoost:
+## AdaBoost:
+- About:
 
+从结果可见，有三个分类器，一个初始权分类器，第二个分类器分类时，根据第一个分类错误的样例的权重，找出正确的分类，第三个根据第二个分类错误的。。。
+
+就是说，每次计算完后，将分类错误的样例权重提高，这样分类器会更在意分类错误的结果。
+
+之后根据每个分类器的错误率给他合适的话语权
+
+得出结果时，根据权重加出最终结果
+
+- Reuslt:
 
 ``` shell
 D:\GitAPP\TensorflowTrain>python adaboost.py
