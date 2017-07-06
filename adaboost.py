@@ -54,7 +54,7 @@ def adaBoostTrainDS (dataArray, classLabels, numIt = 40):
 	for i in range(numIt):
 		bestStump, error, classEst = buildStump(dataArray, classLabels, D)
 		print ("D:", D.T)
-		alpha = np.float(0.5 * math.log((1.0 - error) / max(error, 1e-16)))
+		alpha = np.float(0.5 * math.log((1.0 - error) / max(error, 1e-16))) #计算这个分类器的话语权
 		bestStump['alpha']	= alpha
 		weakClassArr.append(bestStump)
 		print ("classEst：", classEst.T)
@@ -69,9 +69,23 @@ def adaBoostTrainDS (dataArray, classLabels, numIt = 40):
 		if errorRate == 0.0: break
 	return weakClassArr
 
+def adaClassify (dataToClass, classifierArray):
+	dataMatrix = np.mat(dataToClass)
+	m = np.shape(dataMatrix)[0]
+	aggClassEst = np.mat(np.zeros((m, 1)))
+	for i in range(len(classifierArray)):
+		classEst = stumpClassify(dataMatrix, classifierArray[i]['dim'],\
+		classifierArray[i]['thresh'],\
+		classifierArray[i]['ineq'])
+		aggClassEst += classifierArray[i]['alpha'] * classEst
+		print (aggClassEst)
+	return np.sign(aggClassEst)
 
 datMat, classLabels = loadSimpData()
 print("dataMat:", datMat, "classLabels:", classLabels)
 
 classifierArray = adaBoostTrainDS(datMat, classLabels, 9)
 print("classifierArray:", classifierArray)
+
+result = adaClassify([2, 2], classifierArray)
+print("result:", result)
